@@ -1,0 +1,18 @@
+{
+    "commands":[
+        {
+            "id":"ak.tts",
+            "displayName":"Generate Text-to-Speech",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\waapi-text-to-speech\\main.py --original \"${WwiseProjectOriginals}\" ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":"",
+                    "enabledFor":"Sound"
+                },
+            "redirectOutputs":true
+        }       
+    ]
+}
