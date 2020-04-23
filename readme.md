@@ -24,11 +24,12 @@ Demonstrates:
 2. Install python dependencies:
 
     `py -3 -m pip install waapi-client`
-3. Unzip the git repository under: `%APPDATA%\Audiokinetic\Wwise\Add-ons`
+3. Create the `Add-ons` folder under `%APPDATA%\Audiokinetic\Wwise`
+4. Unzip the git repository under: `%APPDATA%\Audiokinetic\Wwise\Add-ons`
 
    **Note**: ensure the `Commands` and `waapi-text-to-speech` folders are directly located under the `Add-ons` folder.
 
-4. Restart Wwise or run the command 'Command Add-ons/Reload'
+5. Restart Wwise or run the command **Command Add-ons/Reload**
 
 ## How to use
 
