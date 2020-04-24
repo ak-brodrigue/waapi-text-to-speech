@@ -2,8 +2,9 @@ from waapi import WaapiClient, CannotConnectToWaapiException
 from pprint import pprint
 import argparse, os, subprocess
 
-parser = argparse.ArgumentParser(description='text to speech')
-parser.add_argument('id', metavar='GUID', nargs='+', help='one or multiple guid of the form \{\}')
+# Define arguments for the script
+parser = argparse.ArgumentParser(description='Generate text to speech from Wwise object ID')
+parser.add_argument('id', metavar='GUID', nargs='+', help='one or multiple guid of the form \{01234567-89ab-cdef-0123-4567890abcde\}')
 parser.add_argument('--original', help='path to the original folder',required=True)
 
 args = parser.parse_args()
@@ -12,8 +13,7 @@ try:
     # Connecting to Waapi using default URL
     with WaapiClient() as client:
 
-        # RPC with options
-        # return an array of all children objects in the default actor-mixer work-unit
+        # Obtain more information for all objects being passed
         get_args = {
             "from": {"id": args.id},
         }
@@ -34,6 +34,7 @@ try:
             
             print('Generating {0}...'.format(wav_file))
 
+            # Execute the powershell script with the Speech Synthesizer from .NET
             subprocess.check_output(["powershell.exe",  '-executionpolicy', 'bypass', '-File', speak_script_path, wav_file, obj['notes']])
 
             imports.append({ 
@@ -42,6 +43,7 @@ try:
                 "importLanguage": "English(US)" if obj['@IsVoice'] else "SFX" 
                 })
 
+        # Import the generated wav files to Wwise
         import_args = {
             "importOperation": "useExisting",
             "default": {},
